@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1880" height="2170" viewBox="0 0 1880 2170">
+<rect width="1880" height="2170" fill="#f4f7fa"/>
+<style>text{font-family:DejaVu Sans,Arial,sans-serif}.field{font-size:12px;fill:#24384d}.head{font-size:18px;font-weight:bold;fill:white}</style>
+<text x="60" y="47" font-size="26" fill="#173c53">Система управління навчальними курсами</text>
+<text x="60" y="80" font-size="14" fill="#506578">16 таблиць · PK — первинний ключ · FK — зовнішній ключ · ? — NULL · UK — унікальне значення</text>
+<text x="60" y="105" font-size="13" fill="#506578">Лінії показують предметні зв’язки. Посилання авторів змін зазначені в полях; повний набір ліній — у schema.drawio.</text>
+<path d="M 1380 178 H 1355.0 V 178 H 1330" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 450 1645 H 475.0 V 658 H 500" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 1330 1645 H 1350 V 658 H 1330" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 1380 1645 H 1355.0 V 658 H 1330" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 1330 793 H 1355.0 V 658 H 1380" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 1330 766 H 1355.0 V 1138 H 1380" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 450 658 H 695.0 V 178 H 940" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 890 712 H 915.0 V 658 H 940" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 500 685 H 475.0 V 658 H 450" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 890 1165 H 910 V 658 H 890" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 890 1192 H 915.0 V 1138 H 940" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 1330 1165 H 1350 V 658 H 1330" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 450 1165 H 475.0 V 658 H 500" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 890 1645 H 910 V 658 H 890" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 500 205 H 475.0 V 178 H 450" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<path d="M 890 178 H 915.0 V 178 H 940" fill="none" stroke="#99a8b7" stroke-width="1.4"/>
+<rect x="60" y="130" width="390" height="92" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M66,130 H444 Q450,130 450,136 V164 H60 V136 Q60,130 66,130" fill="#173c53"/>
+<text class="head" x="72" y="154">roles</text>
+<text class="field" x="72" y="183">id : integer [PK]</text>
+<text class="field" x="72" y="210">name : varchar(50) [UK]</text>
+<rect x="500" y="130" width="390" height="92" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M506,130 H884 Q890,130 890,136 V164 H500 V136 Q500,130 506,130" fill="#173c53"/>
+<text class="head" x="512" y="154">user_roles</text>
+<text class="field" x="512" y="183">user_id : integer [PK,FK]</text>
+<text class="field" x="512" y="210">role_id : integer [PK,FK]</text>
+<rect x="940" y="130" width="390" height="146" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M946,130 H1324 Q1330,130 1330,136 V164 H940 V136 Q940,130 946,130" fill="#173c53"/>
+<text class="head" x="952" y="154">users</text>
+<text class="field" x="952" y="183">id : integer [PK]</text>
+<text class="field" x="952" y="210">email : varchar(100) [UK]</text>
+<text class="field" x="952" y="237">display_name : varchar(200)</text>
+<text class="field" x="952" y="264">created_at : timestamptz</text>
+<rect x="1380" y="130" width="390" height="119" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M1386,130 H1764 Q1770,130 1770,136 V164 H1380 V136 Q1380,130 1386,130" fill="#173c53"/>
+<text class="head" x="1392" y="154">admins</text>
+<text class="field" x="1392" y="183">user_id : integer [PK,FK]</text>
+<text class="field" x="1392" y="210">employee_code : varchar(50) [UK]</text>
+<text class="field" x="1392" y="237">position : varchar(100)</text>
+<rect x="60" y="610" width="390" height="146" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M66,610 H444 Q450,610 450,616 V644 H60 V616 Q60,610 66,610" fill="#173c53"/>
+<text class="head" x="72" y="634">customers</text>
+<text class="field" x="72" y="663">user_id : integer [PK,FK]</text>
+<text class="field" x="72" y="690">first_name : varchar(100)</text>
+<text class="field" x="72" y="717">last_name : varchar(100)</text>
+<text class="field" x="72" y="744">phone : varchar(20) ?</text>
+<rect x="500" y="610" width="390" height="227" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M506,610 H884 Q890,610 890,616 V644 H500 V616 Q500,610 506,610" fill="#173c53"/>
+<text class="head" x="512" y="634">enrollments</text>
+<text class="field" x="512" y="663">id : integer [PK]</text>
+<text class="field" x="512" y="690">customer_id : integer [FK]</text>
+<text class="field" x="512" y="717">course_id : integer [FK]</text>
+<text class="field" x="512" y="744">agreed_price : numeric(10,2)</text>
+<text class="field" x="512" y="771">enrolled_at : timestamptz</text>
+<text class="field" x="512" y="798">updated_at : timestamptz</text>
+<text class="field" x="512" y="825">updated_by : integer [FK] → users.id</text>
+<rect x="940" y="610" width="390" height="362" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M946,610 H1324 Q1330,610 1330,616 V644 H940 V616 Q940,610 946,610" fill="#173c53"/>
+<text class="head" x="952" y="634">courses</text>
+<text class="field" x="952" y="663">id : integer [PK]</text>
+<text class="field" x="952" y="690">title : varchar(200)</text>
+<text class="field" x="952" y="717">description : text</text>
+<text class="field" x="952" y="744">price : numeric(10,2)</text>
+<text class="field" x="952" y="771">level_id : integer [FK]</text>
+<text class="field" x="952" y="798">language_id : integer [FK]</text>
+<text class="field" x="952" y="825">is_deleted : boolean</text>
+<text class="field" x="952" y="852">deleted_at : timestamptz ?</text>
+<text class="field" x="952" y="879">deleted_by : integer ? [FK] → users.id</text>
+<text class="field" x="952" y="906">updated_at : timestamptz</text>
+<text class="field" x="952" y="933">updated_by : integer [FK] → users.id</text>
+<text class="field" x="952" y="960">search_document : tsvector ?</text>
+<rect x="1380" y="610" width="390" height="92" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M1386,610 H1764 Q1770,610 1770,616 V644 H1380 V616 Q1380,610 1386,610" fill="#173c53"/>
+<text class="head" x="1392" y="634">programming_languages</text>
+<text class="field" x="1392" y="663">id : integer [PK]</text>
+<text class="field" x="1392" y="690">name : varchar(50) [UK]</text>
+<rect x="60" y="1090" width="390" height="173" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M66,1090 H444 Q450,1090 450,1096 V1124 H60 V1096 Q60,1090 66,1090" fill="#173c53"/>
+<text class="head" x="72" y="1114">payments</text>
+<text class="field" x="72" y="1143">id : integer [PK]</text>
+<text class="field" x="72" y="1170">enrollment_id : integer [FK,UK]</text>
+<text class="field" x="72" y="1197">amount : numeric(10,2)</text>
+<text class="field" x="72" y="1224">paid_at : timestamptz</text>
+<text class="field" x="72" y="1251">recorded_by : integer [FK] → users.id</text>
+<rect x="500" y="1090" width="390" height="227" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M506,1090 H884 Q890,1090 890,1096 V1124 H500 V1096 Q500,1090 506,1090" fill="#173c53"/>
+<text class="head" x="512" y="1114">lesson_progress</text>
+<text class="field" x="512" y="1143">id : integer [PK]</text>
+<text class="field" x="512" y="1170">enrollment_id : integer [FK]</text>
+<text class="field" x="512" y="1197">lesson_id : integer [FK]</text>
+<text class="field" x="512" y="1224">is_completed : boolean</text>
+<text class="field" x="512" y="1251">completed_at : timestamptz ?</text>
+<text class="field" x="512" y="1278">updated_at : timestamptz</text>
+<text class="field" x="512" y="1305">updated_by : integer [FK] → users.id</text>
+<rect x="940" y="1090" width="390" height="308" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M946,1090 H1324 Q1330,1090 1330,1096 V1124 H940 V1096 Q940,1090 946,1090" fill="#173c53"/>
+<text class="head" x="952" y="1114">lessons</text>
+<text class="field" x="952" y="1143">id : integer [PK]</text>
+<text class="field" x="952" y="1170">course_id : integer [FK]</text>
+<text class="field" x="952" y="1197">title : varchar(200)</text>
+<text class="field" x="952" y="1224">video_url : varchar(500)</text>
+<text class="field" x="952" y="1251">order_number : integer</text>
+<text class="field" x="952" y="1278">is_deleted : boolean</text>
+<text class="field" x="952" y="1305">deleted_at : timestamptz ?</text>
+<text class="field" x="952" y="1332">deleted_by : integer ? [FK] → users.id</text>
+<text class="field" x="952" y="1359">updated_at : timestamptz</text>
+<text class="field" x="952" y="1386">updated_by : integer [FK] → users.id</text>
+<rect x="1380" y="1090" width="390" height="92" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M1386,1090 H1764 Q1770,1090 1770,1096 V1124 H1380 V1096 Q1380,1090 1386,1090" fill="#173c53"/>
+<text class="head" x="1392" y="1114">course_levels</text>
+<text class="field" x="1392" y="1143">id : integer [PK]</text>
+<text class="field" x="1392" y="1170">name : varchar(50) [UK]</text>
+<rect x="60" y="1570" width="390" height="173" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M66,1570 H444 Q450,1570 450,1576 V1604 H60 V1576 Q60,1570 66,1570" fill="#173c53"/>
+<text class="head" x="72" y="1594">certificates</text>
+<text class="field" x="72" y="1623">id : integer [PK]</text>
+<text class="field" x="72" y="1650">enrollment_id : integer [FK,UK]</text>
+<text class="field" x="72" y="1677">certificate_number : varchar(100) [UK]</text>
+<text class="field" x="72" y="1704">issued_at : timestamptz</text>
+<text class="field" x="72" y="1731">issued_by : integer [FK] → users.id</text>
+<rect x="500" y="1570" width="390" height="281" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M506,1570 H884 Q890,1570 890,1576 V1604 H500 V1576 Q500,1570 506,1570" fill="#173c53"/>
+<text class="head" x="512" y="1594">reviews</text>
+<text class="field" x="512" y="1623">id : integer [PK]</text>
+<text class="field" x="512" y="1650">enrollment_id : integer [FK,UK]</text>
+<text class="field" x="512" y="1677">rating : integer</text>
+<text class="field" x="512" y="1704">body : text</text>
+<text class="field" x="512" y="1731">is_deleted : boolean</text>
+<text class="field" x="512" y="1758">deleted_at : timestamptz ?</text>
+<text class="field" x="512" y="1785">deleted_by : integer ? [FK] → users.id</text>
+<text class="field" x="512" y="1812">updated_at : timestamptz</text>
+<text class="field" x="512" y="1839">updated_by : integer [FK] → users.id</text>
+<rect x="940" y="1570" width="390" height="227" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M946,1570 H1324 Q1330,1570 1330,1576 V1604 H940 V1576 Q940,1570 946,1570" fill="#173c53"/>
+<text class="head" x="952" y="1594">course_history</text>
+<text class="field" x="952" y="1623">id : integer [PK]</text>
+<text class="field" x="952" y="1650">course_id : integer [FK]</text>
+<text class="field" x="952" y="1677">operation : varchar(20)</text>
+<text class="field" x="952" y="1704">old_data : jsonb ?</text>
+<text class="field" x="952" y="1731">new_data : jsonb</text>
+<text class="field" x="952" y="1758">changed_at : timestamptz</text>
+<text class="field" x="952" y="1785">changed_by : integer [FK] → users.id</text>
+<rect x="1380" y="1570" width="390" height="200" rx="6" fill="white" stroke="#9bafbf"/>
+<path d="M1386,1570 H1764 Q1770,1570 1770,1576 V1604 H1380 V1576 Q1380,1570 1386,1570" fill="#173c53"/>
+<text class="head" x="1392" y="1594">course_price_history</text>
+<text class="field" x="1392" y="1623">id : integer [PK]</text>
+<text class="field" x="1392" y="1650">course_id : integer [FK]</text>
+<text class="field" x="1392" y="1677">old_price : numeric(10,2)</text>
+<text class="field" x="1392" y="1704">new_price : numeric(10,2)</text>
+<text class="field" x="1392" y="1731">changed_at : timestamptz</text>
+<text class="field" x="1392" y="1758">changed_by : integer [FK] → users.id</text>
+<text x="60" y="2110" font-size="14" fill="#506578">Складені ключі та всі обмеження: schema.dbml та Database/install.sql. Кратності зв’язків: schema.drawio.</text></svg>

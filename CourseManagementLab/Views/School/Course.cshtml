@@ -1,0 +1,14 @@
+@model CoursePage
+<h1>@Model.Course.Title</h1><p>@Model.Course.Description</p><p>@Model.Course.Price грн @(Model.Course.IsDeleted?"· Курс логічно видалений":"")</p><a asp-action="Index">До каталогу</a>
+<section class="panel"><h2>Уроки</h2>
+@foreach(var l in Model.Lessons){<div class="panel @(l.IsDeleted?"deleted":"")"><form method="post" asp-action="LessonSave"><input type="hidden" name="id" value="@l.Id"/><input type="hidden" name="courseId" value="@l.CourseId"/>
+<div class="row"><div><label>Назва</label><input name="title" value="@l.Title" required maxlength="200"/></div><div><label>Посилання на відео</label><input name="videoUrl" value="@l.VideoUrl" maxlength="500"/></div><div><label>Порядок</label><input type="number" name="orderNumber" value="@l.OrderNumber" min="1" required/></div></div>
+<label>Адміністратор</label><select name="actorId">@foreach(var a in Model.Admins){<option value="@a.Id">@a.Name</option>}</select>
+@if(!l.IsDeleted && !Model.Course.IsDeleted){<button>Зберегти зміни уроку</button>}</form>
+<form method="post" asp-action="@(l.IsDeleted?"LessonRestore":"LessonDelete")" class="inline"><input type="hidden" name="id" value="@l.Id"/><input type="hidden" name="courseId" value="@l.CourseId"/>
+<select name="actorId" aria-label="Адміністратор">@foreach(var a in Model.Admins){<option value="@a.Id">@a.Name</option>}</select><button class="@(l.IsDeleted?"":"danger")">@(l.IsDeleted?"Відновити урок":"Видалити урок")</button></form></div>}
+@if(!Model.Course.IsDeleted){<h2>Додати урок</h2><form method="post" asp-action="LessonSave"><input type="hidden" name="id" value="0"/><input type="hidden" name="courseId" value="@Model.Course.Id"/>
+<div class="row"><div><label>Назва</label><input name="title" required maxlength="200"/></div><div><label>Посилання на відео</label><input name="videoUrl" maxlength="500"/></div><div><label>Порядок</label><input name="orderNumber" type="number" min="1" value="@(Model.Lessons.Where(l=>!l.IsDeleted).Select(l=>l.OrderNumber).DefaultIfEmpty(0).Max()+1)" required/></div></div>
+<label>Адміністратор</label><select name="actorId">@foreach(var a in Model.Admins){<option value="@a.Id">@a.Name</option>}</select><button>Додати урок</button></form>}
+</section>
+<section class="panel"><h2>Відгуки</h2>@foreach(var r in Model.Reviews){<p><strong>@r.StudentName · @r.Rating / 5</strong><br/>@r.Body</p><form class="inline" method="post" asp-action="ReviewDelete"><input type="hidden" name="id" value="@r.Id"/><input type="hidden" name="courseId" value="@Model.Course.Id"/><select name="actorId" aria-label="Адміністратор">@foreach(var a in Model.Admins){<option value="@a.Id">@a.Name</option>}</select><button class="danger">Приховати відгук</button></form>}</section>

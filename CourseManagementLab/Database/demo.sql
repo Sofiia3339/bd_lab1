@@ -1,0 +1,10 @@
+SET search_path TO course_lab, public;
+SELECT table_name FROM information_schema.tables WHERE table_schema='course_lab' AND table_type='BASE TABLE' ORDER BY table_name;
+SELECT * FROM v_catalog;
+SELECT * FROM v_enrollments;
+SELECT * FROM v_price_history;
+SELECT * FROM v_course_history ORDER BY id DESC;
+SELECT routine_name,routine_type FROM information_schema.routines WHERE routine_schema='course_lab' ORDER BY routine_type,routine_name;
+SELECT trigger_name,event_manipulation,event_object_table FROM information_schema.triggers WHERE trigger_schema='course_lab' ORDER BY trigger_name;
+SELECT indexname,indexdef FROM pg_indexes WHERE schemaname='course_lab' ORDER BY indexname;
+EXPLAIN (ANALYZE, BUFFERS) SELECT id,title FROM v_catalog WHERE search_document @@ plainto_tsquery('simple','Python');

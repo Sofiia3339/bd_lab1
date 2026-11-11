@@ -1,0 +1,9 @@
+@model EnrollmentPage
+<h1>@Model.Enrollment.StudentName</h1><p>@Model.Enrollment.CourseTitle · прогрес @Model.Enrollment.Progress %</p><a asp-action="Index">До каталогу</a>
+<section class="panel"><h2>Проходження уроків</h2>
+@foreach(var l in Model.Lessons){<div class="actions"><p>@l.Title — @(l.IsCompleted?"Виконано":"Не виконано")</p>
+@if(!l.IsCompleted && !Model.Enrollment.CourseDeleted){<form method="post" asp-action="Complete"><input type="hidden" name="id" value="@Model.Enrollment.Id"/><input type="hidden" name="lessonId" value="@l.LessonId"/><input type="hidden" name="actorId" value="@Model.Enrollment.CustomerId"/><button>Позначити виконаним</button></form>}</div>}
+<p>Сертифікат: <strong>@(Model.Enrollment.CertificateNumber??"Ще не видано")</strong></p>
+@if(Model.Enrollment.CertificateNumber is null && !Model.Enrollment.CourseDeleted){<form method="post" asp-action="Certificate" class="inline"><input type="hidden" name="id" value="@Model.Enrollment.Id"/><select name="actorId" aria-label="Адміністратор">@foreach(var a in Model.Admins){<option value="@a.Id">@a.Name</option>}</select><button>Видати сертифікат</button></form>}
+</section>
+@if(!Model.Enrollment.CourseDeleted){<section class="panel"><h2>Залишити або оновити відгук</h2><form method="post" asp-action="Review"><input type="hidden" name="id" value="@Model.Enrollment.Id"/><input type="hidden" name="actorId" value="@Model.Enrollment.CustomerId"/><label>Оцінка</label><select name="rating">@for(int i=5;i>=1;i--){<option value="@i">@i</option>}</select><label>Відгук</label><textarea name="body" required></textarea><button>Зберегти відгук</button></form></section>}

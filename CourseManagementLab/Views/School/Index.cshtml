@@ -1,0 +1,27 @@
+@model Dashboard
+<h1>Управління навчальними курсами</h1>
+<div class="actions"><a class="button" asp-action="Edit">Створити курс</a><a asp-action="Index" asp-route-showDeleted="@(!Model.ShowDeleted)">@(Model.ShowDeleted?"Активні курси":"Усі курси, включно з видаленими")</a></div>
+<section class="panel"><h2>Каталог курсів</h2>
+<form method="get" asp-action="Index" class="actions"><input name="search" value="@Model.Search" placeholder="Пошук слів: Python" aria-label="Пошук"/><button>Знайти</button><a asp-action="Index">Скинути</a></form>
+<p class="muted">Пошук за словами назви й опису. У режимі всіх курсів показується повний список.</p>
+<table><thead><tr><th>Курс</th><th>Ціна, грн</th><th>Остання зміна, UTC</th><th>Дії</th></tr></thead><tbody>
+@foreach(var c in Model.Courses){<tr class="@(c.IsDeleted?"deleted":"")"><td><a asp-action="Course" asp-route-id="@c.Id">@c.Title</a><small>@c.Description</small>@if(c.IsDeleted){<small>Логічно видалено</small>}</td><td>@c.Price.ToString("0.00")</td><td>@c.UpdatedAt.ToString("dd.MM.yyyy HH:mm:ss")<small>@c.UpdatedBy</small></td><td>
+@if(!c.IsDeleted){<a asp-action="Edit" asp-route-id="@c.Id">Редагувати</a>}
+<form class="inline" method="post" asp-action="@(c.IsDeleted?"Restore":"Delete")"><input type="hidden" name="id" value="@c.Id"/>
+<select name="actorId" aria-label="Адміністратор">@foreach(var a in Model.Admins){<option value="@a.Id">@a.Name</option>}</select><button class="@(c.IsDeleted?"":"danger")">@(c.IsDeleted?"Відновити":"Видалити")</button></form></td></tr>}
+</tbody></table></section>
+<section class="panel"><h2>Записати студента та зареєструвати оплату</h2>
+<form method="post" asp-action="Enroll"><div class="row"><div><label>Студент</label><select name="studentId">@foreach(var s in Model.Students){<option value="@s.Id">@s.Name</option>}</select></div>
+<div><label>Курс</label><select name="courseId">@foreach(var c in Model.Courses.Where(c=>!c.IsDeleted)){<option value="@c.Id">@c.Title — @c.Price грн</option>}</select></div>
+<div><label>Сума, грн</label><input name="amount" type="number" min="0" step="0.01" required/></div>
+<div><label>Адміністратор</label><select name="actorId">@foreach(var a in Model.Admins){<option value="@a.Id">@a.Name</option>}</select></div></div>
+<p><button>Записати й оплатити</button></p><p class="muted">Введіть ціну обраного курсу. Інша сума викличе помилку, і новий запис також буде скасований. Після цього можна повторити з правильною сумою.</p></form></section>
+<section class="panel"><h2>Навчання студентів</h2><table><thead><tr><th>Студент / курс</th><th>Погоджена ціна</th><th>Оплата</th><th>Прогрес</th><th>Сертифікат</th></tr></thead><tbody>
+@foreach(var e in Model.Enrollments){<tr><td><a asp-action="Enrollment" asp-route-id="@e.Id">@e.StudentName</a><small>@e.CourseTitle @(e.CourseDeleted?"(курс видалений)":"")</small></td><td>@e.AgreedPrice грн</td><td>@(e.PaidAmount?.ToString("0.00")??"Немає")</td><td>@e.Progress %</td><td>@(e.CertificateNumber??"Не видано")</td></tr>}
+</tbody></table></section>
+<section class="panel"><h2>Історія зміни цін</h2><table><thead><tr><th>Курс</th><th>Було</th><th>Стало</th><th>Дата, UTC</th><th>Хто змінив</th></tr></thead><tbody>
+@foreach(var h in Model.History){<tr><td>@h.Title</td><td>@h.OldPrice</td><td>@h.NewPrice</td><td>@h.ChangedAt.ToString("dd.MM.yyyy HH:mm:ss")</td><td>@h.ChangedBy</td></tr>}
+</tbody></table></section>
+<section class="panel"><h2>Журнал змін курсів</h2><p class="muted">Останні 30 подій. Записи автоматично формує тригер.</p>
+@foreach(var h in Model.Audit){<details><summary>@h.Title · @h.Operation · @h.ChangedAt.ToString("dd.MM.yyyy HH:mm:ss") UTC · @h.ChangedBy</summary><p>До: <code>@(h.OldData??"—")</code></p><p>Після: <code>@h.NewData</code></p></details>}
+</section>

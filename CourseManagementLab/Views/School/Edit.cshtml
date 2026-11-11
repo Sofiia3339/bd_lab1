@@ -1,0 +1,10 @@
+@model CourseForm
+<h1>@(Model.Id==0?"Новий курс":"Редагування курсу")</h1>
+<section class="panel form"><form method="post" asp-action="Save"><div asp-validation-summary="All"></div><input asp-for="Id" type="hidden"/>
+<label asp-for="Title">Назва</label><input asp-for="Title" required maxlength="200"/>
+<label asp-for="Description">Опис</label><textarea asp-for="Description"></textarea>
+<div class="row"><div><label asp-for="Price">Ціна, грн</label><input asp-for="Price" type="number" min="0" max="99999999.99" step="0.01" required/></div>
+<div><label asp-for="LevelId">Рівень</label><select asp-for="LevelId">@foreach(Option o in ViewBag.Levels){<option value="@o.Id">@o.Name</option>}</select></div>
+<div><label asp-for="LanguageId">Мова програмування</label><select asp-for="LanguageId">@foreach(Option o in ViewBag.Languages){<option value="@o.Id">@o.Name</option>}</select></div></div>
+<label asp-for="ActorId">Хто змінює</label><select asp-for="ActorId">@foreach(Option o in ViewBag.Admins){<option value="@o.Id">@o.Name</option>}</select>
+<p class="actions"><button>Зберегти</button><a asp-action="Index">До каталогу</a></p></form></section>
